@@ -415,91 +415,141 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
             <h2 class="section-title">Pessoas comuns já estão usando o método</h2>
             <p class="section-subtitle">Veja os prints reais de quem comprou, aplicou e já começou a montar marmitas
                 congeladas com mais facilidade.</p>
-            <div class="testimonials-grid">
+            <div class="testimonials-slider-wrap">
+              <div class="testimonials-track" id="testimonials-track">
 
+                <!-- Conjunto original -->
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-1-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-1-oficial.png"
                             alt="Depoimento - Terminando as marmitas aqui" width="400" height="600"
-                            loading="lazy" decoding="async">
+                            loading="eager" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Cliente satisfeita</div>
-                        <div class="t-quote">"O método é muito bom, fiz quase todas as receitas pra ver qual a melhor"
-                        </div>
+                        <div class="t-quote">"O método é muito bom, fiz quase todas as receitas pra ver qual a melhor"</div>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-2-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-2-oficial.png"
-                            alt="Depoimento Fernanda - Primeira semana fazendo marmitas" loading="lazy" width="400"
-                            height="600" decoding="async">
+                            alt="Depoimento Fernanda - Primeira semana fazendo marmitas" loading="lazy" width="400" height="600" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Fernanda</div>
-                        <div class="t-quote">"Primeira semana fazendo as marmitas congeladas, eu e minha mãe trabalhamos
-                            durante a semana e vai ajudar muitooo"</div>
+                        <div class="t-quote">"Primeira semana fazendo as marmitas congeladas, eu e minha mãe trabalhamos durante a semana e vai ajudar muitooo"</div>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-3-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-3-oficial.png"
-                            alt="Depoimento Natalia - Já colocou placa para vender" loading="lazy" width="400"
-                            height="600" decoding="async">
+                            alt="Depoimento Natalia - Já colocou placa para vender" loading="lazy" width="400" height="600" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Natalia</div>
                         <div class="t-quote">"Já coloquei a placa aqui fora, muito obrigada!!!"</div>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-4-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-4-oficial.png"
-                            alt="Depoimento Maria - Delícias da Maria Marmitas Congeladas" loading="lazy" width="400"
-                            height="600" decoding="async">
+                            alt="Depoimento Maria - Delícias da Maria Marmitas Congeladas" loading="lazy" width="400" height="600" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Maria — Delícias da Maria</div>
-                        <div class="t-quote">"Fez para casa e começou a vender — criou sua própria marca de marmitas
-                            congeladas"</div>
+                        <div class="t-quote">"Fez para casa e começou a vender — criou sua própria marca de marmitas congeladas"</div>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-5-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-5-oficial.png"
-                            alt="Depoimento Julia Almeida - 4 semanas economizando" loading="lazy" width="400"
-                            height="600" decoding="async">
+                            alt="Depoimento Julia Almeida - 4 semanas economizando" loading="lazy" width="400" height="600" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Julia Almeida</div>
-                        <div class="t-quote">"4 semanas fazendo as marmitas congeladas. Eu e meu marido estamos
-                            economizando MUITOOO, muito obrigada!!!"</div>
+                        <div class="t-quote">"4 semanas fazendo as marmitas congeladas. Eu e meu marido estamos economizando MUITOOO, muito obrigada!!!"</div>
                     </div>
                 </div>
-
                 <div class="testimonial-card">
                     <picture>
                         <source srcset="assets/depoimentos/depoimento-6-oficial.webp" type="image/webp">
                         <img src="assets/depoimentos/depoimento-6-oficial.png"
-                            alt="Depoimento Simone - Fez pro marido levar pro trabalho" loading="lazy" width="400"
-                            height="600" decoding="async">
+                            alt="Depoimento Simone - Fez pro marido levar pro trabalho" loading="lazy" width="400" height="600" decoding="async">
                     </picture>
                     <div class="t-text">
                         <div class="t-name">Simone</div>
-                        <div class="t-quote">"Fiz semana passada pro meu marido levar para o trabalho as marmitinhas,
-                            ele amouu. Falou até pra eu começar a vender!"</div>
+                        <div class="t-quote">"Fiz semana passada pro meu marido levar para o trabalho as marmitinhas, ele amouu. Falou até pra eu começar a vender!"</div>
                     </div>
                 </div>
 
+                <!-- Cópia para loop contínuo sem espaço em branco -->
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-1-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-1-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Cliente satisfeita</div>
+                        <div class="t-quote">"O método é muito bom, fiz quase todas as receitas pra ver qual a melhor"</div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-2-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-2-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Fernanda</div>
+                        <div class="t-quote">"Primeira semana fazendo as marmitas congeladas, eu e minha mãe trabalhamos durante a semana e vai ajudar muitooo"</div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-3-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-3-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Natalia</div>
+                        <div class="t-quote">"Já coloquei a placa aqui fora, muito obrigada!!!"</div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-4-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-4-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Maria — Delícias da Maria</div>
+                        <div class="t-quote">"Fez para casa e começou a vender — criou sua própria marca de marmitas congeladas"</div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-5-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-5-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Julia Almeida</div>
+                        <div class="t-quote">"4 semanas fazendo as marmitas congeladas. Eu e meu marido estamos economizando MUITOOO, muito obrigada!!!"</div>
+                    </div>
+                </div>
+                <div class="testimonial-card" aria-hidden="true">
+                    <picture>
+                        <source srcset="assets/depoimentos/depoimento-6-oficial.webp" type="image/webp">
+                        <img src="assets/depoimentos/depoimento-6-oficial.png" alt="" width="400" height="600" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="t-text">
+                        <div class="t-name">Simone</div>
+                        <div class="t-quote">"Fiz semana passada pro meu marido levar para o trabalho as marmitinhas, ele amouu. Falou até pra eu começar a vender!"</div>
+                    </div>
+                </div>
+
+              </div>
             </div>
             <div style="text-align:center;margin-top:36px"><a href="#pricing" class="cta-btn">QUERO COMEÇAR AGORA</a>
                 <div class="cta-sub">🔒 Compra segura • ⚡ Acesso rápido • ✅ 7 dias de garantia</div>

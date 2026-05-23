@@ -371,43 +371,34 @@ section { padding: 60px 0; }
 
 /* ===== TESTIMONIALS ===== */
 .testimonials { background: var(--bg); }
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  max-width: 900px;
-  margin: 0 auto;
+.testimonials-slider-wrap { overflow: hidden; }
+.testimonials-track {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .testimonial-card {
+  flex: 0 0 280px;
+  margin-right: 16px;
   background: var(--bg-card);
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--bg-card-border);
-  transition: transform .25s, box-shadow .25s;
 }
-.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .testimonial-card img {
   width: 100%;
   height: auto;
   cursor: pointer;
   transition: opacity .2s;
+  display: block;
 }
 .testimonial-card img:hover { opacity: .9; }
-.testimonial-card .t-text {
-  padding: 16px;
-}
-.testimonial-card .t-name {
-  font-weight: 700;
-  font-size: .9rem;
-  color: var(--primary);
-  margin-bottom: 6px;
-}
-.testimonial-card .t-quote {
-  font-size: .88rem;
-  color: var(--text-muted);
-  font-style: italic;
-  line-height: 1.5;
-}
+.testimonial-card .t-text { padding: 16px; }
+.testimonial-card .t-name { font-weight: 700; font-size: .9rem; color: var(--primary); margin-bottom: 6px; }
+.testimonial-card .t-quote { font-size: .88rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
 
 /* ===== COUNTDOWN ===== */
 .countdown-section {
@@ -1046,20 +1037,31 @@ section { padding: 60px 0; }
 
 /* Desktop: auto-height centered modal */
 @media(min-width:641px) {
-  .modal-overlay {
-    padding: 24px;
-  }
+  .modal-overlay { padding: 24px; }
   .modal-box {
     border-radius: 20px;
     height: auto;
-    max-height: 90vh;
-    padding-bottom: 28px;
+    max-height: 85vh;
+    padding-bottom: 20px;
   }
+  .modal-fire-badge { padding: 10px 16px 9px; }
+  .modal-countdown { padding: 6px 14px; }
+  .modal-headline { padding: 10px 16px 8px; }
+  .modal-price-row { padding: 8px 14px; }
   .modal-benefits {
-    flex: 0 0 auto;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 8px;
+    padding: 8px 14px;
   }
+  .modal-benefits::-webkit-scrollbar { display: none; }
+  .mb-upgrade-row { padding: 8px 10px; }
+  .mb-wa-row { padding: 8px 10px; }
+  .mb-chip { padding: 7px 10px; }
+  .modal-cta-yes { margin: 10px 16px 6px; }
 }
 
 /* ===== LIGHTBOX ===== */

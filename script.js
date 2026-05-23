@@ -72,6 +72,89 @@ const lightboxImg=document.getElementById('lightbox-img');
 document.querySelectorAll('.testimonial-card img').forEach(img=>{img.addEventListener('click',()=>{if(lightbox&&lightboxImg){lightboxImg.src=img.src;lightboxImg.alt=img.alt;lightbox.classList.add('active');}});});
 if(lightbox)lightbox.addEventListener('click',()=>lightbox.classList.remove('active'));
 
+// TESTIMONIALS MARQUEE — JS-driven, draggable
+(function(){
+  var track=document.getElementById('testimonials-track');
+  if(!track)return;
+  var STEP=296,TOTAL=STEP*6,SPEED=65;
+  var x=0,raf=null,lastTs=null,resumeTimer=null,hovered=false;
+
+  function applyX(val){x=val;track.style.transform='translateX('+val+'px)';}
+
+  function step(ts){
+    if(!lastTs)lastTs=ts;
+    var dt=Math.min((ts-lastTs)/1000,0.1);lastTs=ts;
+    var nx=x-SPEED*dt;
+    if(nx<-TOTAL)nx+=TOTAL;
+    applyX(nx);
+    raf=requestAnimationFrame(step);
+  }
+
+  function play(){
+    if(raf)return;
+    while(x<-TOTAL)x+=TOTAL;
+    lastTs=null;
+    raf=requestAnimationFrame(step);
+  }
+
+  function pause(){
+    if(raf){cancelAnimationFrame(raf);raf=null;}
+    lastTs=null;
+  }
+
+  function scheduleResume(delay){
+    clearTimeout(resumeTimer);
+    resumeTimer=setTimeout(function(){if(!hovered)play();},delay||1500);
+  }
+
+  // Hover pause (desktop)
+  var wrap=track.parentElement;
+  if(wrap){
+    wrap.addEventListener('mouseenter',function(){hovered=true;clearTimeout(resumeTimer);pause();});
+    wrap.addEventListener('mouseleave',function(){hovered=false;scheduleResume(800);});
+  }
+
+  // Mouse drag
+  track.addEventListener('mousedown',function(e){
+    if(e.button!==0)return;
+    var sx=e.clientX,sp=x;
+    clearTimeout(resumeTimer);pause();
+    track.style.cursor='grabbing';
+    function move(e){applyX(sp+e.clientX-sx);}
+    function up(){
+      document.removeEventListener('mousemove',move);
+      document.removeEventListener('mouseup',up);
+      track.style.cursor='grab';
+      scheduleResume();
+    }
+    document.addEventListener('mousemove',move);
+    document.addEventListener('mouseup',up);
+  });
+
+  // Touch drag with direction detection
+  var tSX,tSY,tSP,tDir;
+  track.addEventListener('touchstart',function(e){
+    tSX=e.touches[0].clientX;tSY=e.touches[0].clientY;tSP=x;tDir=null;
+    clearTimeout(resumeTimer);pause();
+  },{passive:true});
+  track.addEventListener('touchmove',function(e){
+    var dx=e.touches[0].clientX-tSX,dy=e.touches[0].clientY-tSY;
+    if(tDir===null){
+      if(Math.abs(dx)<5&&Math.abs(dy)<5)return;
+      tDir=Math.abs(dx)>=Math.abs(dy)?'h':'v';
+      if(tDir==='v'){scheduleResume(800);return;}
+    }
+    if(tDir!=='h')return;
+    e.preventDefault();
+    applyX(tSP+dx);
+  },{passive:false});
+  track.addEventListener('touchend',function(){
+    if(tDir==='h')scheduleResume();
+  },{passive:true});
+
+  play();
+})();
+
 // NON-CRITICAL — deferred to idle time
 const idleInit=()=>{
 const names=['Ana C.','Mariana L.','Fernanda S.','Camila R.','Patrícia M.','Juliana A.','Carla B.','Renata F.','Luciana T.','Beatriz N.','Simone G.','Vanessa D.','Tatiane O.','Priscila V.','Débora K.','Amanda P.','Cristina H.','Roberta E.','Sandra Q.','Michele J.'];
