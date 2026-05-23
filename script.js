@@ -1,0 +1,76 @@
+document.addEventListener('DOMContentLoaded',()=>{
+// UTM PROPAGATION — captura parâmetros de rastreamento e repassa a todos os links de checkout
+const _TRACK=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src','fbclid','gclid','ttclid','sck'];
+const _sp=new URLSearchParams(window.location.search);
+const _tp=new URLSearchParams();
+_TRACK.forEach(k=>{const v=_sp.get(k);if(v)_tp.set(k,v);});
+function appendUtms(url){if(!_tp.toString())return url;try{const u=new URL(url);_tp.forEach((v,k)=>u.searchParams.set(k,v));return u.toString();}catch(e){return url;}}
+// UTMs propagados via data-checkout (pixel não detecta checkout no DOM)
+document.querySelectorAll('[data-checkout]').forEach(el=>{el.dataset.checkout=appendUtms(el.dataset.checkout);});
+
+// InitiateCheckout disparado APENAS no clique — nunca no carregamento da página
+function _fireCheckout(url){
+  if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
+  setTimeout(()=>{window.location.href=url;},80);
+}
+document.querySelectorAll('[data-checkout]').forEach(el=>{
+  el.addEventListener('click',e=>{e.preventDefault();_fireCheckout(el.dataset.checkout);});
+});
+
+// COUNTDOWN
+const endTime=Date.now()+9993000;
+const $h=document.getElementById('cd-h');
+const $m=document.getElementById('cd-m');
+const $s=document.getElementById('cd-s');
+function updateCD(){const d=Math.max(0,endTime-Date.now());if($h)$h.textContent=String(Math.floor(d/3600000)).padStart(2,'0');if($m)$m.textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');if($s)$s.textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
+updateCD();setInterval(updateCD,1000);
+
+// STICKY CTA
+const stickyCta=document.getElementById('sticky-cta');
+const heroSection=document.getElementById('hero');
+let stickyShown=false;
+function checkSticky(){if(!heroSection||!stickyCta)return;const b=heroSection.getBoundingClientRect().bottom;if(b<0&&!stickyShown){stickyCta.classList.add('visible');stickyShown=true;}else if(b>=0&&stickyShown){stickyCta.classList.remove('visible');stickyShown=false;}}
+window.addEventListener('scroll',checkSticky,{passive:true});
+
+// FAQ
+document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('click',()=>{const ans=btn.nextElementSibling;const was=btn.classList.contains('active');document.querySelectorAll('.faq-question.active').forEach(q=>{q.classList.remove('active');q.nextElementSibling.classList.remove('open');});if(!was){btn.classList.add('active');ans.classList.add('open');}});});
+
+// FADE-IN
+const fadeObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');fadeObs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>fadeObs.observe(el));
+
+// MODAL
+const modal=document.getElementById('modal-upsell');
+const btnBasico=document.getElementById('btn-basico');
+const modalCloseBtn=document.getElementById('modal-close');
+const btnSkip=document.getElementById('btn-skip');
+if(btnBasico)btnBasico.addEventListener('click',e=>{e.preventDefault();modal&&modal.classList.add('active');});
+if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>modal.classList.remove('active'));
+if(btnSkip)btnSkip.addEventListener('click',()=>{modal.classList.remove('active');_fireCheckout(appendUtms('https://ggcheckout.app/checkout/v5/x4VptOWesCOvldSB4I2V'));});
+if(modal)modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('active');});
+
+// LIGHTBOX
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+document.querySelectorAll('.testimonial-card img').forEach(img=>{img.addEventListener('click',()=>{if(lightbox&&lightboxImg){lightboxImg.src=img.src;lightboxImg.alt=img.alt;lightbox.classList.add('active');}});});
+if(lightbox)lightbox.addEventListener('click',()=>lightbox.classList.remove('active'));
+
+// NON-CRITICAL — deferred to idle time
+const idleInit=()=>{
+const names=['Ana C.','Mariana L.','Fernanda S.','Camila R.','Patrícia M.','Juliana A.','Carla B.','Renata F.','Luciana T.','Beatriz N.','Simone G.','Vanessa D.','Tatiane O.','Priscila V.','Débora K.','Amanda P.','Cristina H.','Roberta E.','Sandra Q.','Michele J.'];
+const cities=['São Paulo','Rio de Janeiro','Belo Horizonte','Curitiba','Salvador','Fortaleza','Recife','Porto Alegre','Goiânia','Manaus','Brasília','Campinas','Guarulhos','Belém','Florianópolis'];
+const actions=['acabou de comprar o Plano Completo','garantiu o acesso agora','fez a compra do Plano Completo','acabou de entrar na oferta','comprou o Método Marmitas Congeladas','garantiu o Plano Completo','acabou de liberar o acesso'];
+const times=['agora','há 1 min','há 2 min','há 3 min','há 5 min'];
+const notifEl=document.getElementById('notif');
+const notifText=document.getElementById('notif-text');
+const notifTime=document.getElementById('notif-time');
+const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
+function showNotif(){if(!notifEl)return;notifText.innerHTML='<strong>'+pick(names)+'</strong> de '+pick(cities)+' '+pick(actions);notifTime.textContent=pick(times);notifEl.classList.add('show');setTimeout(()=>notifEl.classList.remove('show'),4500);}
+setTimeout(showNotif,8000);
+setInterval(()=>showNotif(),18000+Math.random()*12000);
+const viewersEl=document.getElementById('viewers-count');
+if(viewersEl){let c=47+Math.floor(Math.random()*30);viewersEl.textContent=c;setInterval(()=>{c+=Math.floor(Math.random()*5)-2;if(c<30)c=30+Math.floor(Math.random()*10);if(c>120)c=80+Math.floor(Math.random()*15);viewersEl.textContent=c;},5000);}
+};
+if('requestIdleCallback' in window)requestIdleCallback(idleInit,{timeout:2000});
+else setTimeout(idleInit,1000);
+});
