@@ -8,14 +8,14 @@ function appendUtms(url){if(!_tp.toString())return url;try{const u=new URL(url);
 // UTMs propagados via data-checkout (pixel não detecta checkout no DOM)
 document.querySelectorAll('[data-checkout]').forEach(el=>{el.dataset.checkout=appendUtms(el.dataset.checkout);});
 
-// InitiateCheckout disparado APENAS no clique — nunca no carregamento da página
+// InitiateCheckout disparado APENAS nos 3 botões autorizados — nunca no carregamento ou abertura do popup
 function _fireCheckout(url){
   if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
   setTimeout(()=>{window.location.href=url;},80);
 }
-document.querySelectorAll('[data-checkout]').forEach(el=>{
-  el.addEventListener('click',e=>{e.preventDefault();_fireCheckout(el.dataset.checkout);});
-});
+// Botão 1: Plano Completo R$19,90 (página principal)
+const btnPlanoCompleto=document.getElementById('btn-plano-completo');
+if(btnPlanoCompleto)btnPlanoCompleto.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnPlanoCompleto.dataset.checkout);});
 
 // COUNTDOWN
 const endTime=Date.now()+9993000;
@@ -44,10 +44,27 @@ const modal=document.getElementById('modal-upsell');
 const btnBasico=document.getElementById('btn-basico');
 const modalCloseBtn=document.getElementById('modal-close');
 const btnSkip=document.getElementById('btn-skip');
-if(btnBasico)btnBasico.addEventListener('click',e=>{e.preventDefault();modal&&modal.classList.add('active');});
-if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>modal.classList.remove('active'));
-if(btnSkip)btnSkip.addEventListener('click',()=>{modal.classList.remove('active');_fireCheckout(appendUtms('https://ggcheckout.app/checkout/v5/x4VptOWesCOvldSB4I2V'));});
-if(modal)modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('active');});
+const btnModalYes=document.getElementById('modal-yes');
+let _cdInt=null;
+function _startModalCD(){
+  clearInterval(_cdInt);
+  let s=60;
+  const el=document.getElementById('modal-cd-timer');
+  if(!el)return;
+  el.textContent='1:00';
+  _cdInt=setInterval(()=>{
+    s--;
+    if(s<=0){el.textContent='0:00';clearInterval(_cdInt);return;}
+    el.textContent='0:'+String(s).padStart(2,'0');
+  },1000);
+}
+if(btnBasico)btnBasico.addEventListener('click',e=>{e.preventDefault();if(modal){modal.classList.add('active');_startModalCD();}});
+if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);});
+// Botão 2: Plano Premium R$15,90 (pop-up)
+if(btnModalYes)btnModalYes.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnModalYes.dataset.checkout);});
+// Botão 3: Plano Básico R$10,00 (pop-up)
+if(btnSkip)btnSkip.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout(appendUtms('https://ggcheckout.app/checkout/v5/x4VptOWesCOvldSB4I2V'));});
+if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('active');clearInterval(_cdInt);}});
 
 // LIGHTBOX
 const lightbox=document.getElementById('lightbox');

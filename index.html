@@ -72,6 +72,7 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
     <script>
         window.ltq = window.ltq || function() { (window.ltq.q = window.ltq.q || []).push(arguments); };
         window.pixelId = "lt_px_33f5957a7eb9";
+        window.ltq('track', 'PageView');
         var a = document.createElement("script");
         a.setAttribute("async", "");
         a.setAttribute("src", "https://lowtrack.com.br/pixel.js");
@@ -534,7 +535,7 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
                 <div class="plan-card featured">
                     <div class="badge-pop">⭐ Mais escolhido</div>
                     <h3>Plano Completo</h3>
-                    <div class="price"><small>R$</small>27,90</div>
+                    <div class="price"><small>R$</small>19,90</div>
                     <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px">Tudo do Básico + bônus
                         completos para economizar e vender.</p>
                     <ul>
@@ -550,9 +551,9 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
                         <li>Guia de embalagens</li>
                         <li>Planner de produção rápida</li>
                     </ul>
-                    <a href="#" data-checkout="https://ggcheckout.app/checkout/v5/3YAqNOu7gvL5YdkQjIRK" class="plan-cta primary-btn">QUERO
+                    <a href="#" id="btn-plano-completo" data-checkout="https://ggcheckout.app/checkout/v5/3YAqNOu7gvL5YdkQjIRK" class="plan-cta primary-btn">QUERO
                         O PLANO COMPLETO 🍱</a>
-                    <p class="plan-note">Por apenas R$17,90 a mais, você recebe TUDO</p>
+                    <p class="plan-note">Por apenas R$9,90 a mais, você recebe TUDO</p>
                 </div>
 
             </div>
@@ -703,22 +704,28 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
             <!-- Fire badge -->
             <div class="modal-fire-badge">🔥 OFERTA RELÂMPAGO — SÓ AGORA</div>
 
+            <!-- Countdown -->
+            <div class="modal-countdown" id="modal-countdown">
+                <span class="modal-cd-label">⏱ Oferta expira em</span>
+                <span class="modal-cd-timer" id="modal-cd-timer">1:00</span>
+            </div>
+
             <!-- Headline -->
             <div class="modal-headline">
-                Por <span class="modal-hl-extra">+R$9,90</span> leve o<br>
-                <span class="modal-hl-title">Plano Completo</span>
+                De <span class="modal-hl-extra">R$19,90</span> por apenas<br>
+                <span class="modal-hl-title">R$15,90 — Plano Premium</span>
             </div>
 
             <!-- Price comparison -->
             <div class="modal-price-row">
                 <div class="modal-price-old-wrap">
-                    <div class="modal-price-label-sm">Básico</div>
-                    <div class="modal-price-old-val">R$10</div>
+                    <div class="modal-price-label-sm">De</div>
+                    <div class="modal-price-old-val">R$19,90</div>
                 </div>
                 <div class="modal-price-arrow">➜</div>
                 <div class="modal-price-new-wrap">
-                    <div class="modal-price-label-sm">Completo</div>
-                    <div class="modal-price-new-val">R$19,90</div>
+                    <div class="modal-price-label-sm">Por agora</div>
+                    <div class="modal-price-new-val">R$15,90</div>
                 </div>
             </div>
 
@@ -729,12 +736,12 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
                 <div class="mb-upgrade-row">
                     <div class="mb-upgrade-before"><span class="mb-strike">10 receitas</span></div>
                     <div class="mb-upgrade-arrow">→</div>
-                    <div class="mb-upgrade-after"><span class="mb-check">✅</span><span class="mb-new-count">40 receitas</span></div>
+                    <div class="mb-upgrade-after"><span class="mb-check">✅</span><span class="mb-new-count">40 receitas com atualização semanal</span></div>
                 </div>
 
                 <!-- WhatsApp row -->
                 <div class="mb-wa-row">
-                    <img src="whatsapp-svgrepo-com.svg" alt="WhatsApp" class="mb-wa-svg" width="32" height="32" loading="lazy">
+                    <img src="whatsapp-svgrepo-com.svg" alt="WhatsApp" class="mb-wa-svg" width="26" height="26" loading="lazy">
                     <div class="mb-wa-text">
                         <span class="mb-wa-title">Acesso imediato pelo WhatsApp</span>
                         <span class="mb-wa-sub">Chega direto no seu celular — sem espera</span>
@@ -769,7 +776,7 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
 
             <!-- CTAs -->
             <a href="#" data-checkout="https://ggcheckout.app/checkout/v5/wPkgSVMGX1vbvclTBheY" class="modal-cta-yes" id="modal-yes">
-                ✅ SIM! QUERO O COMPLETO — R$19,90
+                ✅ SIM! QUERO O PREMIUM — R$15,90
             </a>
             <button class="modal-cta-no" id="btn-skip">
                 <span class="modal-cta-no-title">Continuar com o Plano Básico — R$10</span>
