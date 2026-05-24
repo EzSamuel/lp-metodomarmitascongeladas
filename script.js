@@ -18,11 +18,10 @@ const btnPlanoCompleto=document.getElementById('btn-plano-completo');
 if(btnPlanoCompleto)btnPlanoCompleto.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnPlanoCompleto.dataset.checkout);});
 
 // COUNTDOWN
-const endTime=Date.now()+9993000;
-const $h=document.getElementById('cd-h');
+const endTime=Date.now()+600000;
 const $m=document.getElementById('cd-m');
 const $s=document.getElementById('cd-s');
-function updateCD(){const d=Math.max(0,endTime-Date.now());if($h)$h.textContent=String(Math.floor(d/3600000)).padStart(2,'0');if($m)$m.textContent=String(Math.floor(d%3600000/60000)).padStart(2,'0');if($s)$s.textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
+function updateCD(){const d=Math.max(0,endTime-Date.now());if($m)$m.textContent=String(Math.floor(d/60000)).padStart(2,'0');if($s)$s.textContent=String(Math.floor(d%60000/1000)).padStart(2,'0');}
 updateCD();setInterval(updateCD,1000);
 
 // STICKY CTA
