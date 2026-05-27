@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded',()=>{
+// TOPBAR — data dinâmica com dia da semana em português
+(function(){
+  const dias=['DOMINGO','SEGUNDA-FEIRA','TERÇA-FEIRA','QUARTA-FEIRA','QUINTA-FEIRA','SEXTA-FEIRA','SÁBADO'];
+  const hoje=new Date();
+  const diaSemana=dias[hoje.getDay()];
+  const dd=String(hoje.getDate()).padStart(2,'0');
+  const mm=String(hoje.getMonth()+1).padStart(2,'0');
+  const aaaa=hoje.getFullYear();
+  const el=document.getElementById('topbar-oferta');
+  if(el)el.textContent=`🔥 OFERTA SOMENTE HOJE — ${diaSemana} ${dd}/${mm}/${aaaa}`;
+})();
+
 // UTM PROPAGATION — captura parâmetros de rastreamento e repassa a todos os links de checkout
 const _TRACK=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src','fbclid','gclid','ttclid','sck'];
 const _sp=new URLSearchParams(window.location.search);
