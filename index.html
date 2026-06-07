@@ -9,8 +9,8 @@
 
     <!-- DNS prefetch / preconnect para domínios externos -->
     <link rel="dns-prefetch" href="https://ggcheckout.app">
-    <link rel="preconnect" href="https://lowtrack.com.br" crossorigin>
-    <link rel="dns-prefetch" href="https://lowtrack.com.br">
+    <link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.utmify.com.br">
 
     <!-- Preload das fontes críticas (latin — cobre todos os caracteres do português) -->
     <link rel="preload" href="/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -68,16 +68,24 @@ img{max-width:100%;height:auto;display:block}a{text-decoration:none;color:inheri
     <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
 
-    <!-- Lowtrack Pixel -->
+    <!-- Utmify Pixel -->
     <script>
-        window.ltq = window.ltq || function() { (window.ltq.q = window.ltq.q || []).push(arguments); };
-        window.pixelId = "lt_px_33f5957a7eb9";
-        window.ltq('track', 'PageView');
+        window.pixelId = "6a25ba030b67b6497b7dfa98";
         var a = document.createElement("script");
         a.setAttribute("async", "");
-        a.setAttribute("src", "https://lowtrack.com.br/pixel.js");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
         document.head.appendChild(a);
     </script>
+
+    <!-- Utmify UTMs -->
+    <script
+        src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+        data-utmify-prevent-xcod-sck
+        data-utmify-prevent-subids
+        async
+        defer
+    ></script>
 </head>
 
 <body>
