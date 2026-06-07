@@ -675,7 +675,7 @@ section { padding: 60px 0; }
 .notif .notif-text { font-size: .82rem; color: var(--text-muted); line-height: 1.4; }
 .notif .notif-text strong { color: var(--text); }
 .notif .notif-time { font-size: .7rem; color: var(--text-light); margin-top: 2px; }
-@media(max-width:768px) { .notif { top: 10px; right: 10px; left: 10px; max-width: none; } }
+@media(max-width:768px) { .notif { top: 60px; right: 10px; left: 10px; max-width: none; } }
 
 /* ===== MODAL/POP-UP (redesigned) ===== */
 .modal-overlay {
