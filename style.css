@@ -646,8 +646,8 @@ section { padding: 60px 0; }
 /* ===== NOTIFICATION ===== */
 .notif {
   position: fixed;
-  bottom: 80px;
-  left: 16px;
+  top: 16px;
+  right: 16px;
   background: var(--bg-card);
   border: 1px solid var(--bg-card-border);
   border-radius: var(--radius);
@@ -658,7 +658,7 @@ section { padding: 60px 0; }
   z-index: 200;
   max-width: 340px;
   box-shadow: var(--shadow-lg);
-  transform: translateX(-120%);
+  transform: translateX(120%);
   transition: transform .45s cubic-bezier(.22,1,.36,1);
 }
 .notif.show { transform: translateX(0); }
@@ -675,7 +675,7 @@ section { padding: 60px 0; }
 .notif .notif-text { font-size: .82rem; color: var(--text-muted); line-height: 1.4; }
 .notif .notif-text strong { color: var(--text); }
 .notif .notif-time { font-size: .7rem; color: var(--text-light); margin-top: 2px; }
-@media(max-width:768px) { .notif { bottom: 76px; left: 10px; right: 10px; max-width: none; } }
+@media(max-width:768px) { .notif { top: 10px; right: 10px; left: 10px; max-width: none; } }
 
 /* ===== MODAL/POP-UP (redesigned) ===== */
 .modal-overlay {
@@ -1492,7 +1492,7 @@ section { padding: 60px 0; }
     right: 14px;
   }
   .wa-float-label {
-    font-size: .68rem;
-    padding: 5px 10px;
+    font-size: .58rem;
+    padding: 4px 8px;
   }
 }
