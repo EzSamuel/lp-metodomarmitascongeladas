@@ -24,14 +24,11 @@ document.querySelectorAll('[data-checkout]').forEach(el=>{
   if(el.tagName==='A')el.href=url;
 });
 
-// InitiateCheckout disparado APENAS nos 3 botões autorizados — nunca no carregamento ou abertura do popup
-function _fireCheckout(url){
-  if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
-  setTimeout(()=>{window.open(url,'_blank','noopener');},80);
-}
+// InitiateCheckout disparado APENAS nos 3 botões autorizados — navegação fica com o <a target="_blank">
+function _fireCheckout(){if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');}
 // Botão 1: Plano Completo R$19,90 (página principal)
 const btnPlanoCompleto=document.getElementById('btn-plano-completo');
-if(btnPlanoCompleto)btnPlanoCompleto.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnPlanoCompleto.dataset.checkout);});
+if(btnPlanoCompleto)btnPlanoCompleto.addEventListener('click',()=>{_fireCheckout();});
 
 // COUNTDOWN
 const endTime=Date.now()+600000;
@@ -76,9 +73,9 @@ function _startModalCD(){
 if(btnBasico)btnBasico.addEventListener('click',e=>{e.preventDefault();if(modal){modal.classList.add('active');_startModalCD();}});
 if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);});
 // Botão 2: Plano Premium R$15,90 (pop-up)
-if(btnModalYes)btnModalYes.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnModalYes.dataset.checkout);});
+if(btnModalYes)btnModalYes.addEventListener('click',()=>{_fireCheckout();});
 // Botão 3: Plano Básico R$10,00 (pop-up)
-if(btnSkip)btnSkip.addEventListener('click',e=>{e.preventDefault();modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout(btnSkip.href);});
+if(btnSkip)btnSkip.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout();});
 if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('active');clearInterval(_cdInt);}});
 
 // LIGHTBOX
