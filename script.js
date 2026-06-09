@@ -24,16 +24,8 @@ document.querySelectorAll('[data-checkout]').forEach(el=>{
   if(el.tagName==='A')el.href=url;
 });
 
-// InitiateCheckout + abertura em nova aba chamados SINCRONAMENTE no gesto do usuário
-// (sem setTimeout: mobile browsers bloqueiam window.open fora do contexto do gesto)
-// e.preventDefault() impede que UTMify ou outro script intercepte e redirecione na aba atual
-function _fireCheckout(url){
-  if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
-  window.open(url,'_blank','noopener');
-}
-// Botão 1: Plano Completo R$19,90 (página principal)
+// Botão 1: Plano Completo R$19,90 (página principal) — listener centralizado abaixo
 const btnPlanoCompleto=document.getElementById('btn-plano-completo');
-if(btnPlanoCompleto)btnPlanoCompleto.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnPlanoCompleto.dataset.checkout);});
 
 // COUNTDOWN
 const endTime=Date.now()+600000;
@@ -77,10 +69,19 @@ function _startModalCD(){
 }
 if(btnBasico)btnBasico.addEventListener('click',e=>{e.preventDefault();if(modal){modal.classList.add('active');_startModalCD();}});
 if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);});
-// Botão 2: Plano Premium R$15,90 (pop-up)
-if(btnModalYes)btnModalYes.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnModalYes.dataset.checkout);});
-// Botão 3: Plano Básico R$10,00 (pop-up)
-if(btnSkip)btnSkip.addEventListener('click',e=>{e.preventDefault();modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout(btnSkip.dataset.checkout);});
+// Checkout handler centralizado — capture:true garante execução ANTES de qualquer listener
+// externo (UTMify, GGCheckout) registrado em nível de elemento.
+// stopImmediatePropagation impede qualquer outro handler de disparar a navegação também.
+// window.open síncrono dentro do gesto: mobile browsers não bloqueiam como popup.
+document.addEventListener('click',function(e){
+  const el=e.target.closest('[data-checkout]');
+  if(!el)return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  if(el.id==='btn-skip'&&modal){modal.classList.remove('active');clearInterval(_cdInt);}
+  if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
+  window.open(el.dataset.checkout,'_blank','noopener');
+},true);
 if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('active');clearInterval(_cdInt);}});
 
 // LIGHTBOX
