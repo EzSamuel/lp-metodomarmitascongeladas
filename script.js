@@ -17,13 +17,17 @@ const _sp=new URLSearchParams(window.location.search);
 const _tp=new URLSearchParams();
 _TRACK.forEach(k=>{const v=_sp.get(k);if(v)_tp.set(k,v);});
 function appendUtms(url){if(!_tp.toString())return url;try{const u=new URL(url);_tp.forEach((v,k)=>u.searchParams.set(k,v));return u.toString();}catch(e){return url;}}
-// UTMs propagados via data-checkout (pixel não detecta checkout no DOM)
-document.querySelectorAll('[data-checkout]').forEach(el=>{el.dataset.checkout=appendUtms(el.dataset.checkout);});
+// UTMs propagados via data-checkout e href (plataforma detecta pelo link explícito no DOM)
+document.querySelectorAll('[data-checkout]').forEach(el=>{
+  const url=appendUtms(el.dataset.checkout);
+  el.dataset.checkout=url;
+  if(el.tagName==='A')el.href=url;
+});
 
 // InitiateCheckout disparado APENAS nos 3 botões autorizados — nunca no carregamento ou abertura do popup
 function _fireCheckout(url){
   if(typeof window.ltq==='function')window.ltq('track','InitiateCheckout');
-  setTimeout(()=>{window.location.href=url;},80);
+  setTimeout(()=>{window.open(url,'_blank','noopener');},80);
 }
 // Botão 1: Plano Completo R$19,90 (página principal)
 const btnPlanoCompleto=document.getElementById('btn-plano-completo');
@@ -74,7 +78,7 @@ if(modalCloseBtn)modalCloseBtn.addEventListener('click',()=>{modal.classList.rem
 // Botão 2: Plano Premium R$15,90 (pop-up)
 if(btnModalYes)btnModalYes.addEventListener('click',e=>{e.preventDefault();_fireCheckout(btnModalYes.dataset.checkout);});
 // Botão 3: Plano Básico R$10,00 (pop-up)
-if(btnSkip)btnSkip.addEventListener('click',()=>{modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout(appendUtms('https://ggcheckout.app/checkout/v5/x4VptOWesCOvldSB4I2V'));});
+if(btnSkip)btnSkip.addEventListener('click',e=>{e.preventDefault();modal.classList.remove('active');clearInterval(_cdInt);_fireCheckout(btnSkip.href);});
 if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('active');clearInterval(_cdInt);}});
 
 // LIGHTBOX
