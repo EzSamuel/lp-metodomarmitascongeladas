@@ -492,6 +492,39 @@
     .li-wa svg { width: 13px; height: 13px; }
     .wa-highlight { color: #1A7A38; font-weight: 900; font-size: 1em; }
 
+    /* ── BÔNUS — refaturação visual para público 50+ ────── */
+    /* Grid de 2 colunas: cards maiores, texto grande e legível */
+    .bonus-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-bottom: 36px;
+    }
+    .bonus-card { border-radius: var(--radius-lg); }
+    .bonus-body { padding: 20px 20px 22px; }
+
+    .bonus-ntag {
+      font-size: .76rem; padding: 4px 12px;
+      margin-bottom: 10px; letter-spacing: .07em;
+    }
+    .bonus-title {
+      font-size: 1.12rem; font-weight: 900;
+      color: var(--coffee); margin-bottom: 10px; line-height: 1.28;
+    }
+    .bonus-desc {
+      font-size: 1rem; color: var(--text-md);
+      line-height: 1.7; margin-bottom: 14px; font-weight: 500;
+    }
+    .bonus-pr     { gap: 10px; align-items: center; }
+    .bonus-strike { font-size: .84rem; }
+    .bonus-free   { font-size: .88rem; padding: 4px 14px; font-weight: 900; }
+
+    /* Mobile: 1 coluna em telas pequenas */
+    @media (max-width: 480px) {
+      .bonus-grid  { grid-template-columns: 1fr; gap: 16px; }
+      .bonus-title { font-size: 1.08rem; }
+      .bonus-desc  { font-size: .97rem; }
+    }
+
     /* ════════════════════════════════════════════════════
        MODAL UPGRADE — REDESIGN COMPLETO
     ════════════════════════════════════════════════════ */
@@ -824,14 +857,87 @@
       <p class="s-sub">Tudo isso sem custo adicional — só por garantir sua vaga hoje.</p>
 
       <div class="bonus-grid">
-        <div class="bonus-card"><img src="bonus/bonus-1.webp" alt="+40 Receitas Premium" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 1</span><div class="bonus-title">+30 Receitas Premium</div><div class="bonus-desc">Mais de 30 receitas novas para variar o cardápio e nunca ficar presa nas mesmas opções. Ideal para consumo e para vender.</div><div class="bonus-pr"><span class="bonus-strike">de R$27,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-2.webp" alt="Receitas com Custo e Lista de Compras" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 2</span><div class="bonus-title">Receitas com Custo e Lista de Compras</div><div class="bonus-desc">Receitas organizadas com custo estimado e lista de compras. Saiba o que comprar, evite desperdício e planeje melhor.</div><div class="bonus-pr"><span class="bonus-strike">de R$19,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-3.webp" alt="Acesso Imediato pelo WhatsApp" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 3</span><div class="bonus-title">Acesso Imediato pelo WhatsApp</div><div class="bonus-desc">O acesso chega direto no WhatsApp. Mais rápido, mais prático e muito mais fácil de consultar quando precisar.</div><div class="bonus-pr"><span class="bonus-strike">de R$15,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-4.webp" alt="Acesso Vitalício com Atualizações" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 4</span><div class="bonus-title">Acesso Vitalício com Atualizações</div><div class="bonus-desc">Você compra uma vez e mantém o acesso para sempre. Novos conteúdos e receitas são adicionados sem custo extra.</div><div class="bonus-pr"><span class="bonus-strike">de R$37,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-5.webp" alt="Planilha de Precificação" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 5</span><div class="bonus-title">Planilha de Precificação</div><div class="bonus-desc">Planilha simples para calcular custos e entender quanto cobrar em cada marmita. Essencial para não vender no prejuízo.</div><div class="bonus-pr"><span class="bonus-strike">de R$17,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-6.webp" alt="Método Venda Suas Marmitas" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag bonus-ntag-amber">Bônus 6 — Limitado</span><div class="bonus-title">Método Venda Suas Marmitas</div><div class="bonus-desc">Guia direto para transformar marmitas em renda extra: como começar, divulgar, montar ofertas e vender.</div><div class="bonus-pr"><span class="bonus-strike">de R$29,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-7.webp" alt="Guia de Embalagens e Personalização" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 7</span><div class="bonus-title">Guia de Embalagens e Personalização</div><div class="bonus-desc">Quais embalagens usar e como deixar suas marmitas com aparência profissional para vender mais.</div><div class="bonus-pr"><span class="bonus-strike">de R$19,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
-        <div class="bonus-card"><img src="bonus/bonus-8.webp" alt="Planner de Produção em Poucas Horas" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'"><div class="bonus-body"><span class="bonus-ntag">Bônus 8</span><div class="bonus-title">Planner de Produção em Poucas Horas</div><div class="bonus-desc">Planejamento prático para saber o que cozinhar, em qual ordem, sem bagunça. Menos tempo, mais marmitas.</div><div class="bonus-pr"><span class="bonus-strike">de R$17,00</span><span class="bonus-free">✓ GRÁTIS</span></div></div></div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-1.webp" alt="+30 Receitas Premium" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 1</span>
+            <div class="bonus-title">+30 Receitas Premium</div>
+            <div class="bonus-desc">Mais de 30 receitas novas para variar o cardápio e nunca ficar presa nas mesmas opções. Ideal para consumo e para vender.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$27,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-2.webp" alt="Receitas com Custo e Lista de Compras" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 2</span>
+            <div class="bonus-title">Receitas com Custo e Lista de Compras</div>
+            <div class="bonus-desc">Receitas organizadas com custo estimado e lista de compras pronta. Saiba o que comprar, evite desperdício e planeje melhor.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$19,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-3.webp" alt="Acesso Imediato pelo WhatsApp" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 3</span>
+            <div class="bonus-title">Acesso Imediato pelo WhatsApp</div>
+            <div class="bonus-desc">O acesso chega direto no seu WhatsApp. Mais rápido, mais prático e muito mais fácil de consultar quando precisar.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$15,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-4.webp" alt="Acesso Vitalício com Atualizações" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 4</span>
+            <div class="bonus-title">Acesso Vitalício com Atualizações</div>
+            <div class="bonus-desc">Você compra uma vez e mantém o acesso para sempre. Novos conteúdos e receitas são adicionados sem nenhum custo extra.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$37,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-5.webp" alt="Planilha de Precificação" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 5</span>
+            <div class="bonus-title">Planilha de Precificação</div>
+            <div class="bonus-desc">Planilha simples para calcular seus custos e saber exatamente quanto cobrar por cada marmita. Essencial para não vender no prejuízo.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$17,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-6.webp" alt="Método Venda Suas Marmitas" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag bonus-ntag-amber">Bônus 6 — Limitado</span>
+            <div class="bonus-title">Método Venda Suas Marmitas</div>
+            <div class="bonus-desc">Guia direto para transformar suas marmitas em renda extra: como começar, divulgar, montar suas ofertas e vender.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$29,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-7.webp" alt="Guia de Embalagens e Personalização" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 7</span>
+            <div class="bonus-title">Guia de Embalagens e Personalização</div>
+            <div class="bonus-desc">Descubra quais embalagens usar e como deixar suas marmitas com aparência profissional para impressionar e vender mais.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$19,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
+        <div class="bonus-card">
+          <img src="bonus/bonus-8.webp" alt="Planner de Produção em Poucas Horas" class="bonus-img" width="640" height="360" loading="lazy" decoding="async" onerror="this.style.background='var(--sand-lt)'">
+          <div class="bonus-body">
+            <span class="bonus-ntag">Bônus 8</span>
+            <div class="bonus-title">Planner de Produção em Poucas Horas</div>
+            <div class="bonus-desc">Planejamento passo a passo de o que cozinhar, em qual ordem e sem bagunça. Menos tempo na cozinha, mais marmitas prontas.</div>
+            <div class="bonus-pr"><span class="bonus-strike">de R$17,00</span><span class="bonus-free">✓ GRÁTIS</span></div>
+          </div>
+        </div>
+
       </div>
 
       <div class="bonus-total">
