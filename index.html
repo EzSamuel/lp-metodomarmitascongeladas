@@ -13,9 +13,6 @@
   <link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.utmify.com.br">
 
-  <!-- Preload LCP image -->
-  <link rel="preload" as="image" href="assets/mockups/mockup-hero.webp" fetchpriority="high" type="image/webp">
-
   <!-- Preload Inter -->
   <link rel="preload" href="fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/inter-700-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -721,6 +718,39 @@
       .modal-yes  { padding: 15px; font-size: .88rem; margin-bottom: 8px; }
       .modal-skip { padding: 12px; font-size: .74rem; }
     }
+
+    /* ── VSL (Hero Video 9:16) ──────────────────────── */
+    .vsl{position:relative;width:100%;max-width:330px;margin:14px auto 4px;aspect-ratio:9/16;border-radius:var(--radius-lg);overflow:hidden;background:var(--coffee);box-shadow:0 14px 44px rgba(42,26,14,.28),0 0 0 3px var(--tc);cursor:pointer;isolation:isolate;}
+    .vsl-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+    /* overlay base: cobre o vídeo, flex coluna centralizada */
+    .vsl-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s ease;pointer-events:none;}
+    /* overlay inicial (antes do 1º clique) */
+    #vsl-overlay{background:rgba(0,0,0,.80);opacity:1;pointer-events:auto;}
+    .vsl.playing #vsl-overlay{opacity:0;pointer-events:none;}
+    /* overlay de pausa (após iniciar) */
+    .vsl-paused-overlay{background:rgba(0,0,0,.60);opacity:0;}
+    .vsl.paused .vsl-paused-overlay{opacity:1;pointer-events:auto;}
+    .vsl-play{width:78px;height:78px;border-radius:50%;background:var(--tc);color:#fff;display:flex;align-items:center;justify-content:center;border:none;box-shadow:0 0 0 0 rgba(184,73,29,.6);animation:vsl-pulse 1.6s infinite cubic-bezier(.66,0,0,1);flex-shrink:0;}
+    .vsl-play svg{display:block;margin-left:3px;}
+    @keyframes vsl-pulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(184,73,29,.55)}70%{transform:scale(1.06);box-shadow:0 0 0 22px rgba(184,73,29,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(184,73,29,0)}}
+    .vsl-label{background:var(--tc);color:#fff;font-size:.82rem;font-weight:800;letter-spacing:.04em;padding:8px 18px;border-radius:40px;text-transform:uppercase;box-shadow:0 4px 16px rgba(184,73,29,.35);animation:pulse-op 1.8s infinite;}
+    .vsl-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;height:6px;background:rgba(250,247,242,.22);opacity:0;transition:opacity .3s ease;pointer-events:none;}
+    .vsl.playing .vsl-bar{opacity:1;}
+    .vsl-bar-fill{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--tc),var(--tc-lt));box-shadow:0 0 8px rgba(184,73,29,.6);animation-name:vsl-progress;animation-timing-function:linear;animation-fill-mode:forwards;animation-play-state:paused;}
+    @keyframes vsl-progress{
+      0%  {width:0%}
+      20% {width:42%}
+      35% {width:60%}
+      45% {width:70%}
+      55% {width:77%}
+      65% {width:83%}
+      75% {width:88%}
+      85% {width:92%}
+      93% {width:95%}
+      100%{width:97%}
+    }
+    @media(max-width:640px){.vsl{max-width:280px;margin:10px auto 2px;border-radius:var(--radius);}}
+    @media(prefers-reduced-motion:reduce){.vsl-play,.vsl-label{animation:none;}}
   </style>
 
   <!-- Utmify Pixel 1 — Pixel de conversão -->
@@ -760,22 +790,33 @@
         <span class="hi">renda extra</span>.
       </h1>
 
-      <p class="hero-sub">
-        O método simples e testado por mais de 1.200 alunos para você cozinhar 1 vez
-        e comer bem a semana toda — sem perder tempo, sem desperdiçar comida e sem
-        gastar fortunas em delivery e apps de comida.
-      </p>
+      <div class="vsl" id="vsl" onclick="vslToggle()">
+        <video
+          id="vsl-video"
+          class="vsl-video"
+          src="vsl-oficial.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="auto"
+        ></video>
+        <div class="vsl-overlay" id="vsl-overlay">
+          <button type="button" class="vsl-play" aria-label="Assistir vídeo com som" tabindex="-1">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="vsl-label" id="vsl-label">▶ CLIQUE PARA ASSISTIR</span>
+        </div>
+        <div class="vsl-overlay vsl-paused-overlay" id="vsl-paused-overlay">
+          <button type="button" class="vsl-play" aria-label="Retomar vídeo" tabindex="-1">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="vsl-label">▶ VOLTAR PRO VÍDEO</span>
+        </div>
+        <div class="vsl-bar" aria-hidden="true"><i class="vsl-bar-fill" id="vsl-bar-fill"></i></div>
+      </div>
 
-      <img
-        src="assets/mockups/mockup-hero.webp"
-        alt="Kit completo Método Marmitas Congeladas — guia PDF, receitas premium, planner, planilha de precificação e bônus"
-        class="hero-mockup"
-        width="600"
-        height="420"
-        loading="eager"
-        fetchpriority="high"
-        decoding="sync"
-      >
 
       <div class="hero-stats">
         <div class="stat"><span class="stat-n">+1.200</span><span class="stat-l">alunos satisfeitos</span></div>
@@ -1196,6 +1237,50 @@
 
     </div>
   </div>
+
+  <script>
+  /* ── VSL controls ──────────────────────────────────────── */
+  var _vslStarted=false;
+  function vslToggle(){
+    var wrap=document.getElementById('vsl');
+    var v=document.getElementById('vsl-video');
+    if(!wrap||!v)return;
+
+    /* Primeiro clique: ativa com som, reinicia do zero */
+    if(!_vslStarted){
+      _vslStarted=true;
+      v.muted=false;v.loop=false;v.currentTime=0;
+      var p=v.play();if(p&&p.catch)p.catch(function(){});
+      wrap.classList.add('playing');
+      wrap.classList.remove('paused');
+      _vslStartBar(v);
+      return;
+    }
+
+    /* Cliques seguintes: qualquer área do vídeo pausa/retoma */
+    if(v.paused){
+      var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});
+      wrap.classList.remove('paused');
+    } else {
+      v.pause();
+      wrap.classList.add('paused');
+    }
+  }
+
+  function _vslStartBar(v){
+    var fill=document.getElementById('vsl-bar-fill');
+    if(!fill)return;
+    var setDur=function(){
+      var d=(isFinite(v.duration)&&v.duration>0)?v.duration:180;
+      fill.style.animationDuration=d+'s';
+      fill.style.animationPlayState='running';
+    };
+    if(isFinite(v.duration)&&v.duration>0){setDur();}
+    else{v.addEventListener('loadedmetadata',setDur,{once:true});setDur();}
+    v.addEventListener('pause', function(){fill.style.animationPlayState='paused';});
+    v.addEventListener('play',  function(){fill.style.animationPlayState='running';});
+  }
+  </script>
 
   <script>
   (function () {
